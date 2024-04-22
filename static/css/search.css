@@ -1,0 +1,146 @@
+
+    
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-flow: wrap;
+    }
+    
+    .card {
+        width: 20%;
+        background: #fff;
+        border: 1px solid #ccc;
+        margin-bottom: 50px;
+        transition: 0.3s;
+    }
+    
+    .card-header {
+        text-align: center;
+        padding: 50px 10px;
+        background: linear-gradient(to right, #ffcc41, #ffa600);
+        color: #fff;
+    }
+    
+    .card-body {
+        padding: 30px 20px;
+        text-align: center;
+        font-size: 18px;
+    }
+    
+    .card-body .btn {
+        color: #fff;
+        text-align: center;
+        background: linear-gradient(to right, #ffcc41, #ffa600);
+        margin-top: 30px;
+        text-decoration: none;
+        padding: 10px 5px;
+        border-radius: 5px;
+        font-family: 'Concert One', cursive;
+    }
+    
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.25);
+    }
+    
+    @media screen and (max-width: 1000px) {
+        .card {
+            width: 40%;
+        }
+    }
+    
+    @media screen and (max-width: 620px) {
+        .container {
+            width: 100%;
+        }
+        .heading {
+            padding: 20px;
+            font-size: 20px;
+        }
+        .card {
+            width: 80%;
+        }
+    }
+    
+    .read-more-cont {
+        display: none;
+    }
+    
+    .popup-box {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 500;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
+    }
+    
+    .popup-box.open {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    .popup-box .popup-content {
+        background-color: #ffffff;
+        width: 600px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 8px;
+    }
+    
+    .popup-box .popup-header {
+        padding: 15px 40px 15px 15px;
+        border-bottom: 1px solid #dddddd;
+    }
+    
+    .popup-box .popup-header h3 {
+        margin: 0;
+        color: #ffa600;
+        font-size: 20px;
+    }
+    
+    .popup-box .popup-body {
+        padding: 15px;
+    }
+    
+    .popup-box .popup-body p {
+        font-size: 16px;
+        color: #555555;
+        margin: 0 0 15px;
+    }
+    
+    .popup-box .popup-footer {
+        padding: 15px;
+        border-top: 1px solid #dddddd;
+        text-align: right;
+    }
+    
+    .popup-box .popup-footer .btn {
+        padding: 8px 15px;
+        border: 1px solid #555555;
+        color: #555555;
+        font-size: 16px;
+        background-color: transparent;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    
+    .popup-box .popup-footer .btn:focus {
+        outline: none;
+    }
+    
+    .popup-header-cont {
+        visibility: hidden;
+    }
+    
+    .logosearch {
+        height: 50px;
+        width: 50px;
+    }

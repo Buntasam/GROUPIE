@@ -28,12 +28,7 @@ func main() {
 	http.HandleFunc("/api/locations", controller.Locations)
 	http.HandleFunc("/api/dates", controller.Dates)
 	http.HandleFunc("/api/relation", controller.Relation)
-	http.HandleFunc("/", controller.Accueil)
-
-	// Ajout de la route pour l'index.html
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "index.html")
-	})
+	http.HandleFunc("/accueil", controller.Accueil) // Change "/" to "/accueil" to avoid conflict
 
 	fmt.Println(string(colorGreen), " http://localhost:8000 ✅ ")        // Mise en place de l'URL pour l'utilisateur
 	fmt.Println(string(colorYellow), " To stop the program : Ctrl + c") // Information pour couper le serveur

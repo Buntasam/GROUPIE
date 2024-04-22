@@ -16,7 +16,7 @@ func Accueil(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//Analyse du fichier accueil.html
-	custTemplate, err := template.ParseFiles("./index.html")
+	custTemplate, err := template.ParseFiles("./templates/accueil.html")
 
 	if err != nil {
 		//Gestion d'erreur
