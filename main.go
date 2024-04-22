@@ -3,7 +3,12 @@ package main
 import (
 	"fmt"
 	"net/http"
+	
+
+	controller "GROUPIE/controller"
 )
+
+
 
 func main() {
 	colorGreen := "\033[32m" // Mise en place de couleur pour la lisibilité dans le terminal
@@ -16,14 +21,14 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Création des différentes routes, pour y accéder le serveur va chercher le package "controller" dans les dossiers et exécuter la fonction demandée.
-	//http.HandleFunc("/api/relation/", controller.RelationData)
-	//http.HandleFunc("/map", controller.Map)
-	//http.HandleFunc("/search", controller.Search)
-	//http.HandleFunc("/api/artists", controller.Artists)
-	//http.HandleFunc("/api/locations", controller.Locations)
-	//http.HandleFunc("/api/dates", controller.Dates)
-	//http.HandleFunc("/api/relation", controller.Relation)
-	//http.HandleFunc("/", controller.Accueil)
+	http.HandleFunc("/api/relation/", controller.RelationData)
+	http.HandleFunc("/map", controller.Map)
+	http.HandleFunc("/search", controller.Search)
+	http.HandleFunc("/api/artists", controller.Artists)
+	http.HandleFunc("/api/locations", controller.Locations)
+	http.HandleFunc("/api/dates", controller.Dates)
+	http.HandleFunc("/api/relation", controller.Relation)
+	http.HandleFunc("/", controller.Accueil)
 
 	// Ajout de la route pour l'index.html
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

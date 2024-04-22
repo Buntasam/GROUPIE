@@ -1,3 +1,4 @@
-module main.go
+module GROUPIE
+
 
 go 1.18
