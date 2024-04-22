@@ -3,7 +3,7 @@ package controller
 import (
 	"fmt"
 	"net/http"
-	controller "https://github.com/Buntasam/GROUPIE/controller"
+	
 )
 
 func main() {
@@ -18,14 +18,14 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Création des différentes routes, pour y accéder le serveur va chercher le package "controller" dans les dossiers et exécuter la fonction demandé.
-	http.HandleFunc("/api/relation/", controller.RelationData)
-	http.HandleFunc("/map", controller.Map)
-	http.HandleFunc("/search", controller.Search)
-	http.HandleFunc("/api/artists", controller.Artists)
-	http.HandleFunc("/api/locations", controller.Locations)
-	http.HandleFunc("/api/dates", controller.Dates)
-	http.HandleFunc("/api/relation", controller.Relation)
-	http.HandleFunc("/", controller.Accueil)
+	//http.HandleFunc("/api/relation/", controller.RelationData)
+	//http.HandleFunc("/map", controller.Map)
+	//http.HandleFunc("/search", controller.Search)
+	//http.HandleFunc("/api/artists", controller.Artists)
+	//http.HandleFunc("/api/locations", controller.Locations)
+	//http.HandleFunc("/api/dates", controller.Dates)
+	//http.HandleFunc("/api/relation", controller.Relation)
+	//http.HandleFunc("/", controller.Accueil)
 
 	fmt.Println(string(colorGreen), "[SERVER_READY] : on http://localhost:8000 ✅ ")    // Mise en place de l'URL pour l'utilisateur
 	fmt.Println(string(colorYellow), "[SERVER_INFO] : To stop the program : Ctrl + c") // Information pour couper le serveur
