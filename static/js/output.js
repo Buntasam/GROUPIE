@@ -20,7 +20,6 @@ const outputHtml = (matches) => {
                 </div>
                 <div class="read-more-cont">
                     <p class="relation" data-url="${match.relations}">...</p>
-                    <button class="btn_map" type="button" onclick="redirectMap()">Accéder à la map</button>
                 </div>
                 <button class="btn" type="button">Voir plus ...</button>
             </div>
