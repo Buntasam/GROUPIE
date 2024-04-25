@@ -10,13 +10,13 @@ import (
 func Accueil(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path != "/accueil" {
-		codeErreur(w, r, 404, "Page not found")
+		http.NotFound(w, r)
 		return
 	}
 
 	custTemplate, err := template.ParseFiles("./templates/accueil.html")
 	if err != nil {
-		codeErreur(w, r, 500, "Template not found : accueil.html")
+		http.Error(w, "Template not found : accueil.html", http.StatusInternalServerError)
 		return
 	}
 
@@ -26,13 +26,13 @@ func Accueil(w http.ResponseWriter, r *http.Request) {
 
 func Search(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/search" {
-		codeErreur(w, r, 404, "Page not found")
+		http.NotFound(w, r)
 		return
 	}
 
 	custTemplate, err := template.ParseFiles("./templates/search.html")
 	if err != nil {
-		codeErreur(w, r, 500, "Template not found : search.html")
+		http.Error(w, "Template not found : search.html", http.StatusInternalServerError)
 		return
 	}
 
@@ -51,19 +51,19 @@ func loadApi(w http.ResponseWriter, r *http.Request, endpoint string) {
 	}
 
 	if !endpointIsValid {
-		codeErreur(w, r, 400, "Invalid endpoint")
+		http.Error(w, "Invalid endpoint", http.StatusBadRequest)
 		return
 	}
 
 	response, err := http.Get("https://groupietrackers.herokuapp.com/api/" + endpoint)
 	if err != nil {
-		codeErreur(w, r, 500, "Server API is not responding")
+		http.Error(w, "Server API is not responding", http.StatusInternalServerError)
 		return
 	}
 
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		codeErreur(w, r, 500, "No data to sent")
+		http.Error(w, "No data to sent", http.StatusInternalServerError)
 		return
 	}
 
@@ -74,13 +74,13 @@ func loadApi(w http.ResponseWriter, r *http.Request, endpoint string) {
 func getId(w http.ResponseWriter, r *http.Request, id string) {
 	response, err := http.Get("https://groupietrackers.herokuapp.com/api/relation/" + id)
 	if err != nil {
-		codeErreur(w, r, 500, "Server API is not responding")
+		http.Error(w, "Server API is not responding", http.StatusInternalServerError)
 		return
 	}
 
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		codeErreur(w, r, 500, "No data to sent")
+		http.Error(w, "No data to sent", http.StatusInternalServerError)
 		return
 	}
 
@@ -92,3 +92,4 @@ func RelationData(w http.ResponseWriter, r *http.Request) {
 	pathPart := strings.Split(r.URL.Path, "/")
 	getId(w, r, pathPart[len(pathPart)-1])
 }
+

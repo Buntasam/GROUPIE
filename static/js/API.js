@@ -7,7 +7,7 @@ function elementAPI(elementJSON, relation) {
         result.push(`${key} : ${parseJSON[key]}`);
     }
 
-    relation.innerHTML = result.join(', ');
+    relation.innerHTML = result.join('<br>');
 }
 
 // POUR LES DATES DANS VOIR PLUS... CONCATAINER LES DATES ET LES LIEUX
