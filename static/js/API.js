@@ -1,4 +1,4 @@
-function elementAPI(elementJSON, relation) {
+function API(elementJSON, relation) {
     let json = JSON.stringify(elementJSON.datesLocations);
     let parseJSON = JSON.parse(json);
     let result = [];
