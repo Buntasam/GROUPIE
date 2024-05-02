@@ -10,24 +10,40 @@
 
 <body>
  
-    
+
+   
 
     <div class="top-bar">
         <div class="logo">
             
             <img src="logo.png" alt="GT">
-        </div>
-        <div class="searchBox">
+            </div>
 
-            <input class="button" id="search" type="text" name="" placeholder="Votre recherche...">
-                    <i class="far fa-search"></i>
-                </button>
-        </div>
+
+            <div class="contenir">
+                <input class="search" id="search" type="text" name="" placeholder="Votre recherche...">
+                <i class="far fa-search"></i>
+                <button class="search-btn" id="search-inp-btn">&#x027A4;</button>
+            </div>
+            
+            <script>
+                document.getElementById('search-inp-btn').addEventListener('click', function() {
+                    var searchTerm = document.getElementById('search').value;
+                    // Faire quelque chose avec le terme de recherche (par exemple, effectuer la recherche)
+                    console.log("Recherche en cours avec le terme : " + searchTerm);
+                    // Ajoutez ici votre logique de recherche
+                });
+            </script>
+            
+            
+
         <div class="navigation">
             <a href="accueil#accueil" class="btn">Accueil</a>
 
         </div>
     </div>
+
+    
 
     <div class="container">
         <div class="heading">
@@ -62,11 +78,10 @@
     </div>
 
     <!-- Mise en place du script disponible au chemin spécifié -->
-    <script src="../static/js/events.js"></script>
-    <script src="../static/js/searchartist.js"></script>
-    <script src="../static/js/output.js"></script>
-    <script src="../static/js/API.js"></script>
-    <script src="../controller/API.go"></script>
+    <script src="../static/js/events.js"></script> 
+    <script src="../static/js/searchartist.js"></script> 
+   <script src="../static/js/output.js"></script> 
+    <script src="../static/js/API.js"></script>                                   
 </body>
 
 </html>

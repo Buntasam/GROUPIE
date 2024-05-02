@@ -1,13 +1,8 @@
 function API(elementJSON, relation) {
-    let json = JSON.stringify(elementJSON.datesLocations);
-    let parseJSON = JSON.parse(json);
-    let result = [];
+    const datesLocations = elementJSON.datesLocations;
+    const result = Object.entries(datesLocations)
+        .map(([key, value]) => `${key} : ${value}`)
+        .join('<br>');
 
-    for (let key in parseJSON) {
-        result.push(`${key} : ${parseJSON[key]}`);
-    }
-
-    relation.innerHTML = result.join('<br>');
+    relation.innerHTML = result;
 }
-
-// POUR LES DATES DANS VOIR PLUS... CONCATAINER LES DATES ET LES LIEUX

@@ -1,7 +1,10 @@
+
 const searchArtists = async searchText => {
+    // Get artists from API
     const response = await fetch(`${apiUrl}${endpoints.artists}`);
     const artistsData = await response.json();
 
+    // Filters
     let matches = artistsData.filter(artist => {
         const regex = new RegExp(`^${searchText}`, 'gi');
         const allMembers = artist.members.join(" ");
@@ -13,10 +16,10 @@ const searchArtists = async searchText => {
         );
     });
 
+    // If research field is empty, empty the card container
     if (searchText.length === 0) {
         matches = [];
         cardContainer.innerHTML = '';
     }
-
     outputHtml(matches);
 }
