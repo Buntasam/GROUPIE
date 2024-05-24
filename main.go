@@ -12,6 +12,9 @@ func main() {
 	fs := http.FileServer(http.Dir("static")) // LOAD STATICS FILES
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
+
+
+
 	//MISE EN PLACE DES CHEMINS D'ACCES
 	http.HandleFunc("/api/relation/", controller.RelationData)
 	http.HandleFunc("/search", controller.Search)
