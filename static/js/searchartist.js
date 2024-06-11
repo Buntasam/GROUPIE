@@ -23,3 +23,4 @@ const searchArtists = async searchText => {
     }
     outputHtml(matches);
 }
+

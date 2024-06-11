@@ -24,6 +24,22 @@ const endpoints = {
     relation: "relation"
 };
 
+document.querySelector(".search-btn").addEventListener("click", () => {
+    search = document.querySelector(".search").value;
+
+    if (search % 2 == 0) {
+        console.log("⚠️Warning: This search engine is not connected to the website ❗️")
+        alert("⚠️  This search engine is not connected to the website ❗️")
+    }
+    if (search % 2 === 1) {
+        console.log("⚠️Warning: This search engine is not connected to the website ❗")
+        alert("⚠️  This search engine is not connected to the website ❗️")
+    }
+
+    document.querySelector(".search").value = ""
+
+});
+
 // Add an event listener for input in the search field
 searchInput.addEventListener('input', () => searchArtists(searchInput.value));
 
@@ -61,41 +77,4 @@ function togglePopup() {
     popup.classList.toggle("open");
 }
 
-// Function to generate the list of locations and make them clickable
-function generateLocationList(locations) {
-    const locationList = document.querySelector('.location-list');
-    locationList.innerHTML = ''; // Clear existing locations
 
-    locations.forEach(location => {
-        const li = document.createElement('li');
-        li.textContent = location.name;
-        li.dataset.lat = location.lat;
-        li.dataset.lon = location.lon;
-        li.classList.add('location-item');
-        locationList.appendChild(li);
-
-        // Add click event listener to each location item
-        li.addEventListener('click', function() {
-            const lat = parseFloat(this.dataset.lat);
-            const lon = parseFloat(this.dataset.lon);
-            macarte.setView([lat, lon], 13); // Adjust zoom level as needed
-            togglePopup(); // Close the popup after clicking
-        });
-    });
-}
-
-document.querySelector(".search-btn").addEventListener("click", () => {
-    search = document.querySelector(".search").value;
-
-    if (search % 2 == 0) {
-        console.log("⚠️Warning: This search engine is not connected to the website ❗️")
-        alert("⚠️  This search engine is not connected to the website ❗️")
-    }
-    if (search % 2 === 1) {
-        console.log("⚠️Warning: This search engine is not connected to the website ❗")
-        alert("⚠️  This search engine is not connected to the website ❗️")
-    }
-
-    document.querySelector(".search").value = ""
-
-});
