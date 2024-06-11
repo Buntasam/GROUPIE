@@ -11,158 +11,260 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-
 </head>
 
 <body>
- 
-
-   <h1>Cherchez vos artistes préférés</h1>
+    <h1>Cherchez vos artistes préférés</h1>
 
     <div class="top-bar">
         <div class="logo">
-            
             <img src="static/css/logo.png" alt="GT">
-            </div>
+        </div>
 
+        <div class="contenir">
+            <input class="search" id="search" type="text" name="" placeholder="Votre recherche...">
+            <i class="far fa-search"></i>
+            <button class="search-btn" id="search-inp-btn">&#x027A4;</button>
+        </div>
 
-            <div class="contenir">
-                <input class="search" id="search" type="text" name="" placeholder="Votre recherche...">
-                <i class="far fa-search"></i>
-                <button class="search-btn" id="search-inp-btn">&#x027A4;</button>
-            </div>
-            
-            <script>
-                document.getElementById('search-inp-btn').addEventListener('click', function() {
-                    var searchTerm = document.getElementById('search').value;
-                    // Faire quelque chose avec le terme de recherche (par exemple, effectuer la recherche)
-                    console.log("Recherche en cours avec le terme : " + searchTerm);
-                    // Ajoutez ici votre logique de recherche
-                });
-            </script>
-            
-            
+        <script>
+            document.getElementById('search-inp-btn').addEventListener('click', function() {
+                var searchTerm = document.getElementById('search').value;
+                console.log("Recherche en cours avec le terme : " + searchTerm);
+                searchCity(searchTerm);
+            });
+        </script>
 
         <div class="navigation">
             <a href="accueil#accueil" class="btn"> HOME </a>
-
-        </div>
-        <div class="navigation">
-            <a href="map#map" class="btn"> MAP </a>
-
         </div>
     </div>
 
-    
-
     <div class="container">
-        <div class="heading">
-        </div>
-        <!-- Génération des cartes en fonction de la recherche -->
-        <div class="row" id="card-data">
-
-        </div>
-
-    <div class="container">
-        <div class="heading">
-        </div>
-        <!-- Génération des cartes en fonction de la recherche -->
-        <div class="row" id="card-data">
-
-        </div>
+        <div class="heading"></div>
+        <div class="row" id="card-data"></div>
     </div>
 
-    <!-- Génération des pop-up pour chaque carte -->
+    <div class="container">
+        <div class="heading"></div>
+        <div class="row" id="card-data"></div>
+    </div>
+
     <div class="popup-box">
-            <div class="map">
-                
+        <div class="map">
             <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
             <script type='text/javascript' src='https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js'></script>
             <script type="text/javascript">
-            var lat = 48.852969;
-            var lon = 2.349903;
-            var macarte = null;
-            var markerClusters;
+                var lat = 54.5260;
+                var lon = 15.2551;
+                var macarte = null;
+                var markerClusters;
 
-            var villes = {
-                "Paris": { "lat": 48.852969, "lon": 2.349903 },
-            };
+                var villes = {
+                    "north_carolina-usa": { "lat": 35.7596, "lon": -79.0193 },
+                    "georgia-usa": { "lat": 32.1656, "lon": -82.9001 },
+                    "los_angeles-usa": { "lat": 34.0522, "lon": -118.2437 },
+                    "saitama-japan": { "lat": 35.8617, "lon": 139.6455 },
+                    "osaka-japan": { "lat": 34.6937, "lon": 135.5023 },
+                    "nagoya-japan": { "lat": 35.1815, "lon": 136.9066 },
+                    "penrose-new_zealand": { "lat": -36.9200, "lon": 174.8000 },
+                    "dunedin-new_zealand": { "lat": -45.8788, "lon": 170.5028 },
+                    "playa_del_carmen-mexico": { "lat": 20.6296, "lon": -87.0739 },
+                    "papeete-french_polynesia": { "lat": -17.5516, "lon": -149.5585 },
+                    "noumea-new_caledonia": { "lat": -22.2711, "lon": 166.4416 },
+                    "london-uk": { "lat": 51.5074, "lon": -0.1278 },
+                    "lausanne-switzerland": { "lat": 46.5197, "lon": 6.6323 },
+                    "lyon-france": { "lat": 45.7640, "lon": 4.8357 },
+                    "victoria-australia": { "lat": -37.8136, "lon": 144.9631 },
+                    "new_south_wales-australia": { "lat": -33.8688, "lon": 151.2093 },
+                    "queensland-australia": { "lat": -20.9176, "lon": 142.7028 },
+                    "auckland-new_zealand": { "lat": -36.8485, "lon": 174.7633 },
+                    "yogyakarta-indonesia": { "lat": -7.7975, "lon": 110.3705 },
+                    "bratislava-slovakia": { "lat": 48.1486, "lon": 17.1077 },
+                    "budapest-hungary": { "lat": 47.4979, "lon": 19.0402 },
+                    "minsk-belarus": { "lat": 53.9045, "lon": 27.5615 },
+                    "california-usa": { "lat": 36.7783, "lon": -119.4179 },
+                    "nevada-usa": { "lat": 38.8026, "lon": -116.4194 },
+                    "sao_paulo-brazil": { "lat": -23.5505, "lon": -46.6333 },
+                    "san_isidro-argentina": { "lat": -34.4713, "lon": -58.5212 },
+                    "arizona-usa": { "lat": 34.0489, "lon": -111.0937 },
+                    "texas-usa": { "lat": 31.9686, "lon": -99.9018 },
+                    "stockholm-sweden": { "lat": 59.3293, "lon": 18.0686 },
+                    "werchter-belgium": { "lat": 50.9670, "lon": 4.6838 },
+                    "lisbon-portugal": { "lat": 38.7223, "lon": -9.1393 },
+                    "bilbao-spain": { "lat": 43.2630, "lon": -2.9350 },
+                    "bogota-colombia": { "lat": 4.7110, "lon": -74.0721 },
+                    "new_york-usa": { "lat": 40.7128, "lon": -74.0060 },
+                    "dusseldorf-germany": { "lat": 51.2277, "lon": 6.7735 },
+                    "aarhus-denmark": { "lat": 56.1629, "lon": 10.2039 },
+                    "manchester-uk": { "lat": 53.4808, "lon": -2.2426 },
+                    "frankfurt-germany": { "lat": 50.1109, "lon": 8.6821 },
+                    "berlin-germany": { "lat": 52.5200, "lon": 13.4050 },
+                    "copenhagen-denmark": { "lat": 55.6761, "lon": 12.5683 },
+                    "minnesota-usa": { "lat": 46.7296, "lon": -94.6859 },
+                    "illinois-usa": { "lat": 40.6331, "lon": -89.3985 },
+                    "mumbai-india": { "lat": 19.0760, "lon": 72.8777 },
+                    "abu_dhabi-united_arab_emirates": { "lat": 24.4539, "lon": 54.3773 },
+                    "pennsylvania-usa": { "lat": 41.2033, "lon": -77.1945 },
+                    "westcliff_on_sea-uk": { "lat": 51.5391, "lon": 0.6986 },
+                    "merkers-germany": { "lat": 50.8167, "lon": 10.1167 },
+                    "maine-usa": { "lat": 45.2538, "lon": -69.4455 },
+                    "gothenburg-sweden": { "lat": 57.7089, "lon": 11.9746 },
+                    "florida-usa": { "lat": 27.9944, "lon": -81.7603 },
+                    "south_carolina-usa": { "lat": 33.8361, "lon": -81.1637 },
+                    "pagney_derriere_barine-france": { "lat": 48.7699, "lon": 6.0424 },
+                    "hamburg-germany": { "lat": 53.5511, "lon": 9.9937 },
+                    "boulogne_billancourt-france": { "lat": 48.8359, "lon": 2.2415 },
+                    "nimes-france": { "lat": 43.8367, "lon": 4.3601 },
+                    "sion-switzerland": { "lat": 46.2331, "lon": 7.3606 },
+                    "ostrava-czechia": { "lat": 49.8209, "lon": 18.2625 },
+                    "klagenfurt-austria": { "lat": 46.6366, "lon": 14.3122 },
+                    "freyming_merlebach-france": { "lat": 49.1355, "lon": 6.7980 },
+                    "zaragoza-spain": { "lat": 41.6488, "lon": -0.8891 },
+                    "madrid-spain": { "lat": 40.4168, "lon": -3.7038 },
+                    "barcelona-spain": { "lat": 41.3851, "lon": 2.1734 },
+                    "rio_de_janeiro-brazil": { "lat": -22.9068, "lon": -43.1729 },
+                    "recife-brazil": { "lat": -8.0476, "lon": -34.8770 },
+                    "leipzig-germany": { "lat": 51.3397, "lon": 12.3731 },
+                    "salem-germany": { "lat": 47.7706, "lon": 9.2702 },
+                    "monchengladbach-germany": { "lat": 51.1805, "lon": 6.4428 },
+                    "cuxhaven-germany": { "lat": 53.8615, "lon": 8.6947 },
+                    "skanderborg-denmark": { "lat": 56.0403, "lon": 9.9244 },
+                    "amsterdam-netherlands": { "lat": 52.3676, "lon": 4.9041 },
+                    "burriana-spain": { "lat": 39.8894, "lon": -0.0844 },
+                    "oulu-finland": { "lat": 65.0121, "lon": 25.4651 },
+                    "napoca-romania": { "lat": 46.7712, "lon": 23.6236 },
+                    "riyadh-saudi_arabia": { "lat": 24.7136, "lon": 46.6753 },
+                    "canton-usa": { "lat": 40.7989, "lon": -81.3784 },
+                    "quebec-canada": { "lat": 46.8139, "lon": -71.2082 },
+                    "las_vegas-usa": { "lat": 36.1699, "lon": -115.1398 },
+                    "monterrey-mexico": { "lat": 25.6866, "lon": -100.3161 },
+                    "del_mar-usa": { "lat": 32.9595, "lon": -117.2653 },
+                    "missouri-usa": { "lat": 37.9643, "lon": -91.8318 },
+                    "chicago-usa": { "lat": 41.8781, "lon": -87.6298 },
+                    "birmingham-uk": { "lat": 52.4862, "lon": -1.8904 },
+                    "sydney-australia": { "lat": -33.8688, "lon": 151.2093 },
+                    "madison-usa": { "lat": 43.0731, "lon": -89.4012 },
+                    "toronto-canada": { "lat": 43.651070, "lon": -79.347015 },
+                    "cleveland-usa": { "lat": 41.4993, "lon": -81.6944 },
+                    "boston-usa": { "lat": 42.3601, "lon": -71.0589 },
+                    "utah-usa": { "lat": 39.3210, "lon": -111.0937 },
+                    "glasgow-uk": { "lat": 55.8642, "lon": -4.2518 },
+                    "dublin-ireland": { "lat": 53.3498, "lon": -6.2603 },
+                    "cardiff-uk": { "lat": 51.4816, "lon": -3.1791 },
+                    "aberdeen-uk": { "lat": 57.1497, "lon": -2.0943 },
+                    "warsaw-poland": { "lat": 52.2297, "lon": 21.0122 },
+                    "milan-italy": { "lat": 45.4642, "lon": 9.1900 },
+                    "michigan-usa": { "lat": 44.3148, "lon": -85.6024 },
+                    "new_hampshire-usa": { "lat": 43.1939, "lon": -71.5724 },
+                    "sochaux-france": { "lat": 47.5125, "lon": 6.8225 },
+                    "eindhoven-netherlands": { "lat": 51.4416, "lon": 5.4697 },
+                    "oslo-norway": { "lat": 59.9139, "lon": 10.7522 },
+                    "colorado-usa": { "lat": 39.5501, "lon": -105.7821 },
+                    "jakarta-indonesia": { "lat": -6.2088, "lon": 106.8456 },
+                    "huizhou-china": { "lat": 23.1115, "lon": 114.4152 },
+                    "changzhou-china": { "lat": 31.8112, "lon": 119.9741 },
+                    "hong_kong-china": { "lat": 22.3193, "lon": 114.1694 },
+                    "sanya-china": { "lat": 18.2528, "lon": 109.5119 },
+                    "aalborg-denmark": { "lat": 57.0488, "lon": 9.9217 },
+                    "seattle-usa": { "lat": 47.6062, "lon": -122.3321 },
+                    "omaha-usa": { "lat": 41.2565, "lon": -95.9345 },
+                    "kansas_city-usa": { "lat": 39.0997, "lon": -94.5786 },
+                    "st_louis-usa": { "lat": 38.6270, "lon": -90.1994 },
+                    "indianapolis-usa": { "lat": 39.7684, "lon": -86.1581 },
+                    "rosemont-usa": { "lat": 41.9860, "lon": -87.8700 },
+                    "grand_rapids-usa": { "lat": 42.9634, "lon": -85.6681 },
+                    "montreal-canada": { "lat": 45.5017, "lon": -73.5673 },
+                    "newark-usa": { "lat": 40.7357, "lon": -74.1724 },
+                    "uniondale-usa": { "lat": 40.7004, "lon": -73.5924 },
+                    "philadelphia-usa": { "lat": 39.9526, "lon": -75.1652 },
+                    "hershey-usa": { "lat": 40.2859, "lon": -76.6502 },
+                    "pittsburgh-usa": { "lat": 40.4406, "lon": -79.9959 },
+                    "columbia-usa": { "lat": 34.0007, "lon": -81.0348 },
+                    "santiago-chile": { "lat": -33.4489, "lon": -70.6693 },
+                    "houston-usa": { "lat": 29.7604, "lon": -95.3698 },
+                    "atlanta-usa": { "lat": 33.7490, "lon": -84.3880 },
+                    "new_orleans-usa": { "lat": 29.9511, "lon": -90.0715 },
+                    "frauenfeld-switzerland": { "lat": 47.5574, "lon": 8.8989 },
+                    "turku-finland": { "lat": 60.4518, "lon": 22.2666 },
+                    "brooklyn-usa": { "lat": 40.6782, "lon": -73.9442 },
+                    "munich-germany": { "lat": 48.1351, "lon": 11.5820 },
+                    "mannheim-germany": { "lat": 49.4875, "lon": 8.4660 },
+                    "san_francisco-usa": { "lat": 37.7749, "lon": -122.4194 },
+                    "buenos_aires-argentina": { "lat": -34.6037, "lon": -58.3816 },
+                    "porto_alegre-brazil": { "lat": -30.0346, "lon": -51.2177 },
+                    "belo_horizonte-brazil": { "lat": -19.9167, "lon": -43.9345 },
+                    "la_plata-argentina": { "lat": -34.9214, "lon": -57.9544 },
+                    "willemstad-netherlands_antilles": { "lat": 12.1224, "lon": -68.8824 },
+                    "brasilia-brazil": { "lat": -15.8267, "lon": -47.9218 },
+                    "oregon-usa": { "lat": 43.8041, "lon": -120.5542 },
+                    "vancouver-canada": { "lat": 49.2827, "lon": -123.1207 },
+                    "prague-czechia": { "lat": 50.0755, "lon": 14.4378 },
+                    "scheessel-germany": { "lat": 53.1685, "lon": 9.4863 },
+                    "st_gallen-switzerland": { "lat": 47.4245, "lon": 9.3767 },
+                    "gdynia-poland": { "lat": 54.5189, "lon": 18.5305 },
+                    "arras-france": { "lat": 50.291, "lon": 2.777 },
+                    "washington-usa": { "lat": 47.7511, "lon": -120.7401 },
+                    "alabama-usa": { "lat": 32.3182, "lon": -86.9023 },
+                    "athens-greece": { "lat": 37.9838, "lon": 23.7275 },
+                    "florence-italy": { "lat": 43.7696, "lon": 11.2558 },
+                    "landgraaf-netherlands": { "lat": 50.9, "lon": 6.0128 },
+                    "seville-spain": { "lat": 37.3891, "lon": -5.9845 },
+                    "bangkok-thailand": { "lat": 13.7563, "lon": 100.5018 },
+                    "taipei-taiwan": { "lat": 25.0330, "lon": 121.5654 },
+                    "seoul-south_korea": { "lat": 37.5665, "lon": 126.9780 },
+                };
 
-            function initMap() {
-                macarte = L.map('map').setView([lat, lon], 11);
-                markerClusters = L.markerClusterGroup();
+                function initMap() {
+                    macarte = L.map('map').setView([lat, lon], 4);
+                    markerClusters = L.markerClusterGroup();
 
-                L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-                    attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-                    minZoom: 1,
-                    maxZoom: 20
-                }).addTo(macarte);
+                    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                        attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                        minZoom: 1,
+                        maxZoom: 20
+                    }).addTo(macarte);
 
-                for (var ville in villes) {
-                    var myIcon = L.icon({
-                        iconUrl: '/static/icons/autres.png',
-                        iconSize: [50, 50],
-                        iconAnchor: [25, 50],
-                        popupAnchor: [-3, -76],
-                    });
-                    var marker = L.marker([villes[ville].lat, villes[ville].lon], { icon: myIcon });
-                    marker.bindPopup(ville);
-                    markerClusters.addLayer(marker);
-                }
-                macarte.addLayer(markerClusters);
-
-                // Add search bar
-                var searchControl = L.control.geocoder({
-                    defaultMarkGeocode: false,
-                }).on('markgeocode', function (e) {
-                    var latlng = e.geocode.center;
-                    macarte.setView(latlng, 13);
-                }).addTo(macarte);
-
-                // Update map coordinates based on search input
-                document.getElementById('search-inp-btn').addEventListener('click', function() {
-                    var searchTerm = document.getElementById('search').value;
-                    if (villes.hasOwnProperty(searchTerm)) {
-                        var newLat = villes[searchTerm].lat;
-                        var newLon = villes[searchTerm].lon;
-                        macarte.setView([newLat, newLon], 13);
-                    } else {
-                        console.log("Ville non trouvée");
+                    for (var ville in villes) {
+                        var marker = L.marker([villes[ville].lat, villes[ville].lon]);
+                        marker.bindPopup(ville);
+                        markerClusters.addLayer(marker);
                     }
-                });
-            }
-            
-            window.onload = function () {
-                initMap();
-            };
+                    macarte.addLayer(markerClusters);
+                }
 
-        </script>
+                function searchCity(searchTerm) {
+                    markerClusters.clearLayers();
+                    for (var ville in villes) {
+                        if (ville.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            var marker = L.marker([villes[ville].lat, villes[ville].lon]);
+                            marker.bindPopup(ville);
+                            markerClusters.addLayer(marker);
+                        }
+                    }
+                    macarte.addLayer(markerClusters);
+                }
+
+                window.onload = function() {
+                    initMap();
+                };
+            </script>
         </div>
-        
 
         <div class="popup-content">
-            <div class="popup-header">
-
-            </div>
-            <div class="popup-body">
-
-            </div>
+            <div class="popup-header"></div>
+            <div class="popup-body"></div>
             <div id="map" style="height: 500px; width: 100%;"></div>
-
             <div class="popup-footer">
                 <button class="popup-close-btn">Fermer</button>
             </div>
         </div>
     </div>
 
-    <!-- Mise en place du script disponible au chemin spécifié -->
     <script src="../static/js/events.js"></script> 
     <script src="../static/js/searchartist.js"></script> 
-   <script src="../static/js/output.js"></script> 
-    <script src="../static/js/API.js"></script>     
-    <script src="../controller/map.go"></script>                              
+    <script src="../static/js/output.js"></script> 
+    <script src="../static/js/API.js"></script>                                   
 </body>
 
 </html>
-
-
